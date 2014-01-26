@@ -8,7 +8,7 @@
 <title>Lista klientow</title>
 </head>
 <body>
-
+<h2 align="center">Lista uzytkownikow</h2>
 	<table align="center" border="2">
 		<th>Imie i nazwisko</th>
 		<th>Login</th>
@@ -21,14 +21,14 @@
 					<td>${klient.login}</td>
 					<td>${klient.email}</td>
 					<td>
-						<form action="clients/edit/show" method="post">
+						<form action="clients/edit" method="post">
 							<button type="submit">Edytuj</button>
-							<input name="user_id" type="hidden" value="${klient.user_id}" />
+							<input name="id" type="hidden" value="${klient.user_id}" />
 						</form>
 
 						<form action="clients/remove" method="post">
-							<button type="submit">Usun</button>
-							<input name="user_id" type="hidden" value="${klient.user_id}" />
+							<button type="submit" >Usun</button>
+							<input name="id" type="hidden" value="${klient.user_id}" />
 						</form>
 					
 					</td>

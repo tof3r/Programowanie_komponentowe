@@ -4,7 +4,10 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import glinski.dawid.wypozyczalnia.book.Ksiazka;
 import glinski.dawid.wypozyczalnia.book.KsiazkaServiceImpl;
@@ -90,6 +93,23 @@ public class NewContentController {
 		List<Pracownik> pracownicy = pracownikServImpl.wszyscyPracownicy();
 		model.addAttribute("pracownicy", pracownicy);
 		return "employees";
+	}
+	
+	@RequestMapping(value = "/employees/remove", method = RequestMethod.POST)
+	public String patientRemove(HttpServletRequest request, Locale locale,
+			Model model, Principal principal,
+			@RequestParam("id") int id) {
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"content-module.xml");
+
+		pracownikServImpl = (PracownikServiceImpl) context
+				.getBean("employeeServiceImpl");
+		if (principal != null) {
+			pracownikServImpl.usunPracownika(id);
+			model.addAttribute("patients", pracownikServImpl.wszyscyPracownicy());
+		}
+		return "employees";
+
 	}
 
 	// //////////////ksiazka///////////////////////

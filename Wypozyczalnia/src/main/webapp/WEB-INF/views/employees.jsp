@@ -8,7 +8,7 @@
 <title>Lista pracownikow</title>
 </head>
 <body>
-
+<h2 align="center">Lista pracownikow</h2>
 	<table align="center" border="2">
 		<th>Imie i nazwisko</th>
 		<th>Login</th>
@@ -23,14 +23,14 @@
 					<td>${pracownik.telefon}</td>
 					<td>${pracownik.adres }</td>
 					<td>
-						<form action="patients/edit/show" method="post">
+						<form action="employees/edit" method="post">
 							<button type="submit">Edytuj</button>
-							<input name="pesel" type="hidden" value="${patient.pesel}" />
+							<input name="id" type="hidden" value="${pracownik.id}" />
 						</form>
 
-						<form action="patient/remove" method="post">
+						<form action="employees/remove" method="post">
 							<button type="submit" >Usun</button>
-							<input name="pesel" type="hidden" value="${patient.pesel}" />
+							<input name="id" type="hidden" value="${pracownik.id}" />
 						</form>
 					
 					</td>
