@@ -45,8 +45,8 @@ public class NewContentController {
 		klientServImpl = (KlientServiceImpl) context
 				.getBean("klientServiceImpl");
 		int newID = klientServImpl.dodajKlienta(klient);
-		if(newID>0)
-			model.addAttribute("success",true);
+		if (newID > 0)
+			model.addAttribute("success", true);
 		return "registered";
 	}
 
@@ -57,9 +57,9 @@ public class NewContentController {
 
 		klientServImpl = (KlientServiceImpl) context
 				.getBean("klientServiceImpl");
-			List<Klient> klienci = klientServImpl.wszyscyKlienci();
-			model.addAttribute("klienci", klienci);
-			return "clients";
+		List<Klient> klienci = klientServImpl.wszyscyKlienci();
+		model.addAttribute("klienci", klienci);
+		return "clients";
 	}
 
 	// ////////////////pracownik////////////////////////
@@ -82,11 +82,16 @@ public class NewContentController {
 
 	@RequestMapping(value = "/employees", method = RequestMethod.GET)
 	public String employees(ModelMap model, Principal principal) {
-			List<Pracownik> pracownicy = pracownikServImpl.wszyscyPracownicy();
-			model.addAttribute("klienci", pracownicy);
-			return "employees";
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"content-module.xml");
+
+		pracownikServImpl = (PracownikServiceImpl) context
+				.getBean("employeeServiceImpl");
+		List<Pracownik> pracownicy = pracownikServImpl.wszyscyPracownicy();
+		model.addAttribute("pracownicy", pracownicy);
+		return "employees";
 	}
-	
+
 	// //////////////ksiazka///////////////////////
 	@RequestMapping(value = "/add_book", method = RequestMethod.GET)
 	public String newBook(Model model) {

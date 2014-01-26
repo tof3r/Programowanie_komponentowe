@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -63,9 +64,15 @@ public class PracownikDAOImpl implements PracownikDAO {
 
 	@Override
 	public List<Pracownik> getAll() {
-		final String sql = "SELECT * FROM `pracownik`";
-		List<Pracownik> pracownicy = jdbcTemplate.query(sql,
-				new BeanPropertyRowMapper<Pracownik>(Pracownik.class));
+		List<Pracownik> pracownicy = null;
+		try {
+			final String sql = "SELECT * FROM `pracownik`";
+
+			pracownicy =  jdbcTemplate.query(sql,new BeanPropertyRowMapper(Pracownik.class));
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			pracownicy = null;
+		}
 		return pracownicy;
 	}
 }

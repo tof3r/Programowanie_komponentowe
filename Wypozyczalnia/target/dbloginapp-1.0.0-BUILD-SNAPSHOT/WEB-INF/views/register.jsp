@@ -25,7 +25,8 @@
 		</div>
 	</c:if>
 	<div>
-		<form:form method="post" action="register/newUser" modelAttribute="klient">
+		<form:form method="post" action="register"
+			modelAttribute="klient">
 			<table align="center">
 				<thead>
 					<tr>

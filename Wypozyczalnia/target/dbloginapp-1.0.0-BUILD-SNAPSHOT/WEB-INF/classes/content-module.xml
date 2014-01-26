@@ -18,7 +18,7 @@
 	</bean>     
 
 	 <bean id="ksiazkaServiceImpl" class="glinski.dawid.wypozyczalnia.book.KsiazkaServiceImpl">
-        <property name="ksiazkaDao" ref="ksiazkaDaoImpl" />
+        <property name="ksiazkaDAO" ref="ksiazkaDaoImpl" />
     </bean>
 
     <bean id="ksiazkaDaoImpl" class="glinski.dawid.wypozyczalnia.book.KsiazkaDAOImpl">
@@ -26,7 +26,7 @@
     </bean>
     
     <bean id="klientServiceImpl" class="glinski.dawid.wypozyczalnia.client.KlientServiceImpl">
-        <property name="klientDao" ref="klientDaoImpl" />
+        <property name="klientDAO" ref="klientDaoImpl" />
     </bean>
 
     <bean id="klientDaoImpl" class="glinski.dawid.wypozyczalnia.client.KlientDAOImpl">
@@ -34,18 +34,10 @@
     </bean>
     
     <bean id="employeeServiceImpl" class="glinski.dawid.wypozyczalnia.employee.PracownikServiceImpl">
-        <property name="pracownikDao" ref="employeeDaoImpl" />
+        <property name="pracownikDAO" ref="employeeDaoImpl" />
     </bean>
 
     <bean id="employeeDaoImpl" class="glinski.dawid.wypozyczalnia.employee.PracownikDAOImpl">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
-    
-    <bean id="rentServiceImpl" class="glinski.dawid.wypozyczalnia.rent.WypozyczenieServiceImpl">
-        <property name="rentDao" ref="rentDaoImpl" />
-    </bean>
-
-    <bean id="rentDaoImpl" class="glinski.dawid.wypozyczalnia.rent.WypozyczenieDAOImpl">
         <property name="dataSource" ref="dataSource" />
     </bean>
 	

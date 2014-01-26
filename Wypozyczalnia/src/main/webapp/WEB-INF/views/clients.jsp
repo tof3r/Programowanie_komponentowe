@@ -1,4 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.samaxes.com/taglib/secure" prefix="secure"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <%@ page session="false"%>
 <html>
 <head>
@@ -18,18 +21,14 @@
 					<td>${klient.login}</td>
 					<td>${klient.email}</td>
 					<td>
-						<form action="patients/edit/show" method="post">
-							<button type="submit" class="btn btn-primary">Edytuj</button>
-							<input name="pesel" type="hidden" value="${patient.pesel}" />
-						</form>
-						<form action="patient/visits" method="post">
-							<button type="submit" class="btn btn-warning">Wizyty</button>
-							<input name="pesel" type="hidden" value="${patient.pesel}" />
+						<form action="clients/edit/show" method="post">
+							<button type="submit">Edytuj</button>
+							<input name="user_id" type="hidden" value="${klient.user_id}" />
 						</form>
 
-						<form action="patient/remove" method="post">
-							<button type="submit" class="btn btn-danger">Usun</button>
-							<input name="pesel" type="hidden" value="${patient.pesel}" />
+						<form action="clients/remove" method="post">
+							<button type="submit">Usun</button>
+							<input name="user_id" type="hidden" value="${klient.user_id}" />
 						</form>
 					
 					</td>
@@ -39,7 +38,7 @@
 	</table>
 
 	<P align="center">
-		<a href="<c:url value="/" />"> Strona glowna</a>
+		<a href="<c:url value="welcome" />"> Panel uzytkownika</a>
 	</P>
 </body>
 </html>
