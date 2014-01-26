@@ -1,5 +1,7 @@
 package glinski.dawid.wypozyczalnia.book;
 
+import java.util.List;
+
 public class KsiazkaServiceImpl implements KsiazkaService {
 
 	private KsiazkaDAO ksiazkaDAO;
@@ -26,6 +28,11 @@ public class KsiazkaServiceImpl implements KsiazkaService {
 	@Override
 	public Ksiazka getKsiazka(int id) {
 		return ksiazkaDAO.get(id);
+	}
+
+	@Override
+	public List<Ksiazka> wszystkieKsiazki() {
+		return ksiazkaDAO.getAll();
 	}
 
 }

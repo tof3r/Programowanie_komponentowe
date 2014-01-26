@@ -1,7 +1,12 @@
 package glinski.dawid.wypozyczalnia.book;
 
+import glinski.dawid.wypozyczalnia.client.Klient;
+
+import java.util.List;
+
 import javax.sql.DataSource;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -50,6 +55,20 @@ public class KsiazkaDAOImpl implements KsiazkaDAO {
 		}
 
 		return ksiazka;
+	}
+
+	@Override
+	public List<Ksiazka> getAll() {
+		List<Ksiazka> ksiazki = null;
+		try {
+			final String sql = "SELECT * FROM `ksiazka`";
+
+			ksiazki =  jdbcTemplate.query(sql,new BeanPropertyRowMapper(Ksiazka.class));
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			ksiazki = null;
+		}
+		return ksiazki;
 	}
 
 }

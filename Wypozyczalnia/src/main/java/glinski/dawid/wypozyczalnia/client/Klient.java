@@ -1,7 +1,7 @@
 package glinski.dawid.wypozyczalnia.client;
 
 public class Klient {
-	private int user_id;
+	private int id;
 	private String imie;
 	private String nazwisko;
 	private String email;
@@ -9,12 +9,12 @@ public class Klient {
 	private String haslo;
 	private int enabled;
 	
-	public int getUserId() {
-		return user_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserId(int user_id) {
-		this.user_id = user_id;
+	public void setId(int user_id) {
+		this.id = user_id;
 	}
 
 	public String getImie() {

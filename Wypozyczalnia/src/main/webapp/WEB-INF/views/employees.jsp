@@ -8,7 +8,7 @@
 <title>Lista pracownikow</title>
 </head>
 <body>
-<h2 align="center">Lista pracownikow</h2>
+	<h2 align="center">Lista pracownikow</h2>
 	<table align="center" border="2">
 		<th>Imie i nazwisko</th>
 		<th>Login</th>
@@ -22,25 +22,24 @@
 					<td>${pracownik.email}</td>
 					<td>${pracownik.telefon}</td>
 					<td>${pracownik.adres }</td>
-					<td>
-						<form action="employees/edit" method="post">
-							<button type="submit">Edytuj</button>
-							<input name="id" type="hidden" value="${pracownik.id}" />
-						</form>
-
-						<form action="employees/remove" method="post">
-							<button type="submit" >Usun</button>
-							<input name="id" type="hidden" value="${pracownik.id}" />
-						</form>
-					
-					</td>
+					<td><secure:one roles="ROLE_EMPLOYEE,ROLE_ADMIN">
+							<form action="employees/edit" method="post">
+								<button type="submit">Edytuj</button>
+								<input name="id" type="hidden" value="${pracownik.id}" />
+							</form>
+						</secure:one> <secure:one roles="ROLE_ADMIN">
+							<form action="employees/remove" method="post">
+								<button type="submit">Usun</button>
+								<input name="id" type="hidden" value="${pracownik.id}" />
+							</form>
+						</secure:one></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
 	<P align="center">
-		<a href="<c:url value="welcome" />"> Panel uzytkownika</a>
+		<a href="<c:url value="/welcome" />"> Panel uzytkownika</a>
 	</P>
 </body>
 </html>

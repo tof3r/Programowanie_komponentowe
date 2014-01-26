@@ -8,12 +8,19 @@
 
 	<secure:one roles='ROLE_USER'>
 		<P>
-			<a href="<c:url value="book" />">Lista ksiazek</a>
+			<a href="<c:url value="books/search" />">Szukaj ksiazki</a>
+		</P>
+		<P>
+			<a href="<c:url value="books" />">Wypozyczenia</a>
 		</P>
 	</secure:one>
 	<secure:one roles='ROLE_EMPLOYEE'>
 		<P>
+			<a href="<c:url value="books/add_book" />">Dodaj ksiazke</a>
+		</P>
+		<P>
 			<a href="<c:url value="clients" />">Lista klientow</a>
+			
 		</P>
 	</secure:one>
 	<secure:one roles='ROLE_ADMIN'>

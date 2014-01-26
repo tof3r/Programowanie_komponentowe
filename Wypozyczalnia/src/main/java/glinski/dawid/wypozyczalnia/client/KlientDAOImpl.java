@@ -20,8 +20,8 @@ public class KlientDAOImpl implements KlientDAO {
 	@Override
 	public int insert(Klient klient) {
 
-		final String SQL_KLIENT_INS = "INSERT INTO `klient` (`user_id`,`imie`, `nazwisko`, `email`, `login`, `haslo`, enabled) VALUES (DEFAULT,?,?,?,?,?,?)";
-		jdbcTemplate.update(SQL_KLIENT_INS, new Object[] { klient.getImie(),
+		final String SQL_KLIENT_INS = "INSERT INTO `klient` (`id`,`imie`, `nazwisko`, `email`, `login`, `haslo`, `enabled`) VALUES (DEFAULT,?,?,?,?,?,?)";
+		jdbcTemplate.update(SQL_KLIENT_INS, new Object[] { klient.getId(),klient.getImie(),
 				klient.getNazwisko(), klient.getEmail(), klient.getLogin(),
 				klient.getHaslo(), 0 });
 		return jdbcTemplate.queryForInt("SELECT last_insert_id()");
@@ -30,14 +30,14 @@ public class KlientDAOImpl implements KlientDAO {
 
 	@Override
 	public void update(int id, Klient klient) {
-		String sql = "UPDATE `klient` set `imie` = '?', `nazwisko` = '?', `email` = '?', `login` = '?', `haslo` = '?', `enabled` = '?' where user_id = ?";
+		String sql = "UPDATE `klient` set `imie` = '?', `nazwisko` = '?', `email` = '?', `login` = '?', `haslo` = '?', `enabled` = '?' where id = ?";
 
 		jdbcTemplate.update(
 				sql,
 				new Object[] { klient.getImie(), klient.getNazwisko(),
 						klient.getEmail(), klient.getLogin(),
 						klient.getHaslo(), klient.getEnabled(),
-						klient.getUserId() });
+						klient.getId() });
 	}
 
 	@Override
@@ -49,13 +49,13 @@ public class KlientDAOImpl implements KlientDAO {
 	@Override
 	public Klient get(int user_id) {
 		Klient klient;
-		String sql = "SELECT * FROM `user` WHERE user_id=?";
+		String sql = "SELECT * FROM `klient` WHERE id=?";
 		try {
 			klient = jdbcTemplate.queryForObject(sql, new Object[] { user_id },
 					new BeanPropertyRowMapper<Klient>(Klient.class));
 		} catch (EmptyResultDataAccessException e) {
 			klient = new Klient();
-			klient.setUserId(0);
+			klient.setId(0);
 		}
 
 		return klient;
@@ -63,9 +63,9 @@ public class KlientDAOImpl implements KlientDAO {
 
 	@Override
 	public void enable(Klient klient) {
-		String sql = "UPDATE `klient` SET `enabled`=? WHERE user_id=?";
+		String sql = "UPDATE `klient` SET `enabled`=? WHERE id=?";
 		jdbcTemplate.update(sql,
-				new Object[] { klient.getEnabled(), klient.getUserId() });
+				new Object[] { klient.getEnabled(), klient.getId() });
 	}
 
 	@Override
