@@ -5,7 +5,7 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>Lista klientow</title>
+<title>Lista ksiazek</title>
 </head>
 <style>
 .added {
@@ -19,44 +19,59 @@
 <body>
 	<c:if test="${success}">
 		<div class="added">
-			<P align="center">
-			<h2>Dodano nowa ksiazke.</h2>
+			<P>
+			<h2 align="center">Dodano nowa ksiazke.</h2>
 			</P>
 		</div>
 	</c:if>
-	<h2 align="center">Ksiazki</h2>
-	<table align="center" border="2">
-		<th>Tytul</th>
-		<th>Autor</th>
-		<th>Akcje</th>
-		<tbody>
-			<c:forEach var="ksiazka" items="${ksiazki}">
-				<tr>
-					<td>${ksiazka.tytul}</td>
-					<td>${ksiazka.autor}</td>
-					<td><secure:one roles="ROLE_USER">
-							<form action="books/rent" method="post">
-								<button type="submit">Wypozycz</button>
-								<input name="id" type="hidden" value="${ksiazka.id}" />
-							</form>
-						</secure:one> <secure:one roles="ROLE_EMPLOYEE">
-							<form action="books/edit" method="post">
-								<button type="submit">Edytuj</button>
-								<input name="id" type="hidden" value="${ksiazka.id}" />
-							</form>
+	<c:if test="${success_remove}">
+		<div class="added">
+			<P>
+			<h2 align="center">Usunieto ksiazke.</h2>
+			</P>
+		</div>
+	</c:if>
+	<c:if test="${not success}">
+		<c:if test="${not success_remove}">
+			<h2 align="center">Ksiazki</h2>
+			<table align="center" border="2">
+				<th>Tytul</th>
+				<th>Autor</th>
+				<th>Akcje</th>
+				<tbody>
+					<c:forEach var="ksiazka" items="${ksiazki}">
+						<tr>
+							<td>${ksiazka.tytul}</td>
+							<td>${ksiazka.autor}</td>
+							<td><secure:one roles="ROLE_USER">
+									<form action="books/rent" method="post">
+										<button type="submit">Wypozycz</button>
+										<input name="id" type="hidden" value="${ksiazka.id}" />
+									</form>
+								</secure:one> <secure:one roles="ROLE_EMPLOYEE">
+									<form action="books/edit" method="post">
+										<button type="submit">Edytuj</button>
+										<input name="id" type="hidden" value="${ksiazka.id}" />
+									</form>
 
-							<form action="books/remove" method="post">
-								<button type="submit">Usun</button>
-								<input name="id" type="hidden" value="${ksiazka.id}" />
-							</form>
-						</secure:one></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-
+									<form action="books/remove" method="post">
+										<button type="submit">Usun</button>
+										<input name="id" type="hidden" value="${ksiazka.id}" />
+									</form>
+								</secure:one></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:if>
+	</c:if>
+	<secure:one roles="ROLE_EMPLOYEE">
 	<P align="center">
-		<a href="<c:url value="/welcome" />"> Panel uzytkownika</a>
+		<a href="/dbloginapp/books/add_book"> Dodaj ksiazke</a>
+	</P>
+	</secure:one>
+	<P align="center">
+		<a href="/dbloginapp/welcome"> Panel uzytkownika</a>
 	</P>
 </body>
 </html>

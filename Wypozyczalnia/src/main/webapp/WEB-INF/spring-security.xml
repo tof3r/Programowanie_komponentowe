@@ -6,9 +6,8 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 	
 	<security:http auto-config="true">
-	<security:intercept-url pattern="/books/add_book" access="ROLE_EMPLOYEE"/>
-		<security:intercept-url pattern="/books*" access="ROLE_USER"/>
-		<security:intercept-url pattern="/clients*" access="ROLE_EMPLOYEE" />
+		<security:intercept-url pattern="/books*" access="ROLE_USER,ROLE_EMPLOYEE"/>
+		<security:intercept-url pattern="/clients*" access="ROLE_EMPLOYEE,ROLE_USER" />
 		<security:intercept-url pattern="/employees*" access="ROLE_ADMIN" />
 		<security:form-login login-page="/login" default-target-url="/welcome"
 			authentication-failure-url="/loginfailed" />

@@ -47,7 +47,7 @@
 		</form:form>
 		<secure:one roles="ROLE_EMPLOYEE">
 		<P align="center">
-			<a href="<c:url value="/welcome" />"> Powrot</a>
+			<a href="/dbloginapp/welcome" > Powrot</a>
 		</P></secure:one>
 	</div>
 </body>

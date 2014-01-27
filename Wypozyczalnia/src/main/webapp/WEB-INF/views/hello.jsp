@@ -16,7 +16,7 @@
 	</secure:one>
 	<secure:one roles='ROLE_EMPLOYEE'>
 		<P>
-			<a href="<c:url value="books/add_book" />">Dodaj ksiazke</a>
+			<a href="<c:url value="books" />">Lista ksiazek</a>
 		</P>
 		<P>
 			<a href="<c:url value="clients" />">Lista klientow</a>

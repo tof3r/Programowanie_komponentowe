@@ -76,20 +76,21 @@ public class NewContentController {
 				.getBean("klientServiceImpl");
 		if (principal != null) {
 			klientServImpl.usunKlienta(id);;
-			model.addAttribute("clients", klientServImpl.wszyscyKlienci());
+			//model.addAttribute("clients", klientServImpl.wszyscyKlienci());
+			model.addAttribute("success", true);
 		}
 		return "clients";
 
 	}
 
 	// ////////////////pracownik////////////////////////
-	@RequestMapping(value = "/add_employee", method = RequestMethod.GET)
+	@RequestMapping(value = "/employees/add_employee", method = RequestMethod.GET)
 	public String newEmployee(Model model) {
 		model.addAttribute("pracownik", new Pracownik());
 		return "add_employee";
 	}
 
-	@RequestMapping(value = "/add_employee", method = RequestMethod.POST)
+	@RequestMapping(value = "/employees/add_employee", method = RequestMethod.POST)
 	public String newEmployeePOST(Model model, Pracownik pracownik) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"content-module.xml");
@@ -97,7 +98,8 @@ public class NewContentController {
 		pracownikServImpl = (PracownikServiceImpl) context
 				.getBean("employeeServiceImpl");
 		pracownikServImpl.dodajPracownika(pracownik);
-		return "add_employee";
+		model.addAttribute("success_add", true);
+		return "/employees";
 	}
 
 	@RequestMapping(value = "/employees", method = RequestMethod.GET)
@@ -123,31 +125,33 @@ public class NewContentController {
 				.getBean("employeeServiceImpl");
 		if (principal != null) {
 			pracownikServImpl.usunPracownika(id);
-			model.addAttribute("employees", pracownikServImpl.wszyscyPracownicy());
+			model.addAttribute("success", true);
+			//model.addAttribute("employees", pracownikServImpl.wszyscyPracownicy());
 		}
 		return "employees";
 
 	}
 
 	// //////////////ksiazka///////////////////////
-	@RequestMapping(value = "/dbloginapp/books/add_book", method = RequestMethod.GET)
+	@RequestMapping(value = "/books/add_book", method = RequestMethod.GET)
 	public String newBook(Model model) {
 		model.addAttribute("ksiazka", new Ksiazka());
 		return "add_book";
 	}
 
-	@RequestMapping(value = "/dbloginapp/books/add_book", method = RequestMethod.POST)
+	@RequestMapping(value = "/books/add_book", method = RequestMethod.POST)
 	public String newBookPOST(Model model, Ksiazka ksiazka,
 			@RequestParam("gatunki") int id) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"content-module.xml");
-		model.addAttribute("type","add_book");
+		
 		ksiazkaServImpl = (KsiazkaServiceImpl) context
 				.getBean("ksiazkaServiceImpl");
 		ksiazka.setId_gatunku(id);
 		ksiazkaServImpl.dodajKsiazke(ksiazka);
 		model.addAttribute("success",true);
-		return "/dbloginapp/books";
+		model.addAttribute("type","add_book");
+		return "/books";
 	}
 
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
@@ -160,5 +164,23 @@ public class NewContentController {
 		List<Ksiazka> ksiazki = ksiazkaServImpl.wszystkieKsiazki();
 		model.addAttribute("ksiazki", ksiazki);
 		return "books";
+	}
+	
+	@RequestMapping(value = "/books/remove", method = RequestMethod.POST)
+	public String bookRemove(HttpServletRequest request, Locale locale,
+			Model model, Principal principal,
+			@RequestParam("id") int id) {
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"content-module.xml");
+
+		ksiazkaServImpl = (KsiazkaServiceImpl) context
+				.getBean("ksiazkaServiceImpl");
+		if (principal != null) {
+			ksiazkaServImpl.usunKsiazke(id);
+			model.addAttribute("success_remove", true);
+			//model.addAttribute("employees", pracownikServImpl.wszyscyPracownicy());
+		}
+		return "books";
+
 	}
 }

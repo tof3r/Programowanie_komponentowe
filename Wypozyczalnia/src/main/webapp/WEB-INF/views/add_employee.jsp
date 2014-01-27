@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<form:form method="post" action="employees/add_employee"
+		<form:form method="post" action="/dbloginapp/employees/add_employee"
 			modelAttribute="pracownik">
 			<table align="center">
 				<thead>
@@ -46,7 +46,7 @@
 				</tbody>
 			</table>
 		</form:form>
-		<P align="center"> <a href="<c:url value="welcome" />" > Powrot do strony glownej</a> </P>
+		<P align="center"> <a href="/dbloginapp/welcome" > Powrot do strony glownej</a> </P>
 	</div>
 </body>
 </html>
