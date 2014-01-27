@@ -31,7 +31,7 @@ public class PracownikDAOImpl implements PracownikDAO {
 
 	@Override
 	public void update(int id, Pracownik pracownik) {
-		String sql = "UPDATE `pracownik` set `imie` = ?, `nazwisko` = ?, `email` = ?, `telefon` = ?, `adres` = ? where user_id = " + id;
+		String sql = "UPDATE `pracownik` set `imie` = ?, `nazwisko` = ?, `email` = ?, `telefon` = ?, `adres` = ? where id = " + id;
 
 		jdbcTemplate.update(
 				sql,

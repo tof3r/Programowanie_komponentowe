@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<form:form method="post" action="/dbloginapp/employees/add_employee"
+		<form:form method="post" action="/dbloginapp/employees/${type}"
 			modelAttribute="pracownik">
 			<table align="center">
 				<thead>
