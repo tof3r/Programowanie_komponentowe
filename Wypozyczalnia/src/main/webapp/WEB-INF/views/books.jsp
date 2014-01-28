@@ -49,11 +49,6 @@
 										<input name="id" type="hidden" value="${ksiazka.id}" />
 									</form>
 								</secure:one> <secure:one roles="ROLE_EMPLOYEE">
-									<form action="books/edit" method="post">
-										<button type="submit">Edytuj</button>
-										<input name="id" type="hidden" value="${ksiazka.id}" />
-									</form>
-
 									<form action="books/remove" method="post">
 										<button type="submit">Usun</button>
 										<input name="id" type="hidden" value="${ksiazka.id}" />

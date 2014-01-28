@@ -12,5 +12,7 @@ public interface KsiazkaService {
 
 	public Ksiazka getKsiazka(int id);
 	
+	public Ksiazka getKsiazka(String tytul);
+	
 	public List<Ksiazka> wszystkieKsiazki();
 }

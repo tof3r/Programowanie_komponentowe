@@ -26,8 +26,8 @@ public class KlientServiceImpl implements KlientService {
 	}
 
 	@Override
-	public void enableKlient(Klient klient) {
-		klientDAO.enable(klient);
+	public void enableKlient(int id) {
+		klientDAO.enable(id);
 	}
 
 	@Override

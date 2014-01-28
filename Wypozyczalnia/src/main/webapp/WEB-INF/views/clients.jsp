@@ -24,34 +24,43 @@
 			</P>
 		</div>
 	</c:if>
+	<c:if test="${success_activate}">
+		<div class="added">
+			<P>
+			<h2 align="center">Aktywowano klienta.</h2>
+			</P>
+		</div>
+	</c:if>
 	<c:if test="${not success}">
-		<h2 align="center">Lista uzytkownikow</h2>
-		<table align="center" border="2">
-			<th>Imie i nazwisko</th>
-			<th>Login</th>
-			<th>Email</th>
-			<th>Akcje</th>
-			<tbody>
-				<c:forEach var="klient" items="${klienci}">
-					<tr>
-						<td>${klient.imie}&nbsp;${klient.nazwisko}</td>
-						<td>${klient.login}</td>
-						<td>${klient.email}</td>
-						<td><secure:one roles="ROLE_USER,ROLE_EMPLOYEE">
-								<form action="clients/edit" method="post">
-									<button type="submit">Edytuj</button>
-									<input name="id" type="hidden" value="${klient.id}" />
-								</form>
-							</secure:one> <secure:one roles="ROLE_EMPLOYEE">
-								<form action="clients/remove" method="post">
-									<button type="submit">Usun</button>
-									<input name="id" type="hidden" value="${klient.id}" />
-								</form>
-							</secure:one></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<c:if test="${not success_activate}">
+			<h2 align="center">Lista uzytkownikow</h2>
+			<table align="center" border="2">
+				<th>Imie i nazwisko</th>
+				<th>Login</th>
+				<th>Email</th>
+				<tbody>
+					<c:forEach var="klient" items="${klienci}">
+						<tr>
+							<td>${klient.imie}&nbsp;${klient.nazwisko}</td>
+							<td>${klient.login}</td>
+							<td>${klient.email}</td>
+							<secure:one roles="ROLE_EMPLOYEE">
+								<td><form action="clients/remove" method="post">
+										<button type="submit">Usun</button>
+										<input name="id" type="hidden" value="${klient.id}" />
+									</form></td>
+								<c:if test="${klient.enabled=='0'}">
+									<td><form action="clients/activate" method="post">
+											<button type="submit">Aktywuj</button>
+											<input name="id" type="hidden" value="${klient.id}" />
+										</form></td>
+								</c:if>
+							</secure:one>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:if>
 	</c:if>
 	<P align="center">
 		<a href="/dbloginapp/welcome"> Panel uzytkownika</a>

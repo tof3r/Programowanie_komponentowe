@@ -12,5 +12,7 @@ public interface KsiazkaDAO {
 
 	public Ksiazka get(int id);
 	
+	public Ksiazka get(String tytul);
+	
 	public List<Ksiazka> getAll();
 }

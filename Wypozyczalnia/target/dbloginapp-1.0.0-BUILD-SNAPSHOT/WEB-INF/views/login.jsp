@@ -35,7 +35,7 @@
 				<td><input type='password' name='j_password' /></td>
 			</tr>
 			<tr>
-				<td><input name="submit" type="submit" value="submit" /></td>
+				<td><input name="submit" type="submit" value="Zaloguj" /></td>
 				<td><input name="reset" type="reset" /></td>
 			</tr>
 		</table>

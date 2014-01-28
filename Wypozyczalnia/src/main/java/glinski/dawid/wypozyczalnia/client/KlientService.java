@@ -12,7 +12,7 @@ public interface KlientService {
 
 	public Klient getKlient(int user_id);
 
-	public void enableKlient(Klient klient);
+	public void enableKlient(int id);
 	
 	public List<Klient> wszyscyKlienci();
 }

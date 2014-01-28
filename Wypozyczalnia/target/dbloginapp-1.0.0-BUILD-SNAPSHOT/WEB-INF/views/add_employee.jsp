@@ -1,12 +1,15 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.samaxes.com/taglib/secure" prefix="secure"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <html>
 <head>
 <title>Dodaj pracownika</title>
 </head>
 <body>
 	<div>
-		<form:form method="post" action="add_employee"
+		<form:form method="post" action="/dbloginapp/employees/${type}"
 			modelAttribute="pracownik">
 			<table align="center">
 				<thead>
@@ -43,7 +46,7 @@
 				</tbody>
 			</table>
 		</form:form>
-		<P align="center"> <a href="<c:url value="/" />" > Powrot do strony glownej</a> </P>
+		<P align="center"> <a href="/dbloginapp/welcome" > Powrot do strony glownej</a> </P>
 	</div>
 </body>
 </html>

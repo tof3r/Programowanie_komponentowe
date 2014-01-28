@@ -1,12 +1,15 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.samaxes.com/taglib/secure" prefix="secure"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <html>
 <head>
 <title>Dodaj ksiazke</title>
 </head>
 <body>
 	<div>
-		<form:form id="gatunki" method="post" action="add_book"
+		<form:form id="gatunki" method="post" action="/dbloginapp/books/add_book"
 			modelAttribute="ksiazka">
 			<table align="center">
 				<thead>
@@ -42,9 +45,10 @@
 				</tbody>
 			</table>
 		</form:form>
+		<secure:one roles="ROLE_EMPLOYEE">
 		<P align="center">
-			<a href="<c:url value="/" />"> Powrot do strony glownej</a>
-		</P>
+			<a href="/dbloginapp/welcome" > Powrot</a>
+		</P></secure:one>
 	</div>
 </body>
 </html>

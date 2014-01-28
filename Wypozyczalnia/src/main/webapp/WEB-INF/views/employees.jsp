@@ -55,12 +55,7 @@
 								<td>${pracownik.email}</td>
 								<td>${pracownik.telefon}</td>
 								<td>${pracownik.adres }</td>
-								<td><secure:one roles="ROLE_EMPLOYEE,ROLE_ADMIN">
-										<form action="employees/edit" method="post">
-											<button type="submit">Edytuj</button>
-											<input name="id" type="hidden" value="${pracownik.id}" />
-										</form>
-									</secure:one> <secure:one roles="ROLE_ADMIN">
+								<td> <secure:one roles="ROLE_ADMIN">
 										<form action="employees/remove" method="post">
 											<button type="submit">Usun</button>
 											<input name="id" type="hidden" value="${pracownik.id}" />

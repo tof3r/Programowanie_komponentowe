@@ -1,7 +1,5 @@
 package glinski.dawid.wypozyczalnia.book;
 
-import glinski.dawid.wypozyczalnia.client.Klient;
-
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -48,6 +46,22 @@ public class KsiazkaDAOImpl implements KsiazkaDAO {
 		try {
 			ksiazka = (Ksiazka) jdbcTemplate.queryForObject(sql,
 					new Object[] { id }, new BeanPropertyRowMapper<Ksiazka>(
+							Ksiazka.class));
+		} catch (EmptyResultDataAccessException e) {
+			ksiazka = new Ksiazka();
+			ksiazka.setId(0);
+		}
+
+		return ksiazka;
+	}
+	
+	@Override
+	public Ksiazka get(String tytul) {
+		Ksiazka ksiazka;
+		String sql = "SELECT * FROM `ksiazka` WHERE tytul=?";
+		try {
+			ksiazka = (Ksiazka) jdbcTemplate.queryForObject(sql,
+					new Object[] { tytul }, new BeanPropertyRowMapper<Ksiazka>(
 							Ksiazka.class));
 		} catch (EmptyResultDataAccessException e) {
 			ksiazka = new Ksiazka();

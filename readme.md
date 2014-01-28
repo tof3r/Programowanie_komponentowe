@@ -17,4 +17,4 @@ zaimplementowane:
 - usuwanie klientow + info
 - usuwanie pracownikow + info
 - usuwanie ksiazek + info
-- wyswietlanie danych do edycji pracownika
+- aktywacja uzytkownika + info

@@ -12,7 +12,7 @@ public interface KlientDAO {
 
 	public Klient get(int user_id);
 	
-	public void enable(Klient klient);
+	public void enable(int id);
 	
 	public List<Klient> getAll();
 }

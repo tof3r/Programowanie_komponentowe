@@ -20,8 +20,8 @@ public class KlientDAOImpl implements KlientDAO {
 	@Override
 	public int insert(Klient klient) {
 
-		final String SQL_KLIENT_INS = "INSERT INTO `klient` (`id`,`imie`, `nazwisko`, `email`, `login`, `haslo`, `enabled`) VALUES (DEFAULT,?,?,?,?,?,?)";
-		jdbcTemplate.update(SQL_KLIENT_INS, new Object[] { klient.getId(),klient.getImie(),
+		final String SQL_KLIENT_INS = "INSERT INTO `klient` (`imie`, `nazwisko`, `email`, `login`, `haslo`, `enabled`) VALUES (?,?,?,?,?,?)";
+		jdbcTemplate.update(SQL_KLIENT_INS, new Object[] { klient.getImie(),
 				klient.getNazwisko(), klient.getEmail(), klient.getLogin(),
 				klient.getHaslo(), 0 });
 		return jdbcTemplate.queryForInt("SELECT last_insert_id()");
@@ -62,10 +62,10 @@ public class KlientDAOImpl implements KlientDAO {
 	}
 
 	@Override
-	public void enable(Klient klient) {
-		String sql = "UPDATE `klient` SET `enabled`=? WHERE id=?";
+	public void enable(int id) {
+		String sql = "UPDATE `klient` SET `enabled`=1 WHERE id=?";
 		jdbcTemplate.update(sql,
-				new Object[] { klient.getEnabled(), klient.getId() });
+				new Object[] { id});
 	}
 
 	@Override

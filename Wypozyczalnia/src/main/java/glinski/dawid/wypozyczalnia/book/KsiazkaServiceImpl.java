@@ -29,6 +29,11 @@ public class KsiazkaServiceImpl implements KsiazkaService {
 	public Ksiazka getKsiazka(int id) {
 		return ksiazkaDAO.get(id);
 	}
+	
+	@Override
+	public Ksiazka getKsiazka(String tytul) {
+		return ksiazkaDAO.get(tytul);
+	}
 
 	@Override
 	public List<Ksiazka> wszystkieKsiazki() {

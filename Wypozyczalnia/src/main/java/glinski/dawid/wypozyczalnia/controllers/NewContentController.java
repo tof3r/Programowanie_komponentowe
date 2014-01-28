@@ -18,7 +18,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,6 +76,22 @@ public class NewContentController {
 		return "clients";
 
 	}
+	
+	@RequestMapping(value = "/clients/activate", method = RequestMethod.POST)
+	public String clientActivate(HttpServletRequest request, Locale locale,
+			Model model, Principal principal, @RequestParam("id") int id) {
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"content-module.xml");
+
+		klientServImpl = (KlientServiceImpl) context
+				.getBean("klientServiceImpl");
+		if (principal != null) {
+			klientServImpl.enableKlient(id);
+			model.addAttribute("success_activate", true);
+		}
+		return "clients";
+
+	}
 
 	// ////////////////pracownik////////////////////////
 	@RequestMapping(value = "/employees/add_employee", method = RequestMethod.GET)
@@ -94,7 +109,7 @@ public class NewContentController {
 				.getBean("employeeServiceImpl");
 		pracownikServImpl.dodajPracownika(pracownik);
 		model.addAttribute("success_add", true);
-		return "/employees";
+		return "employees";
 	}
 
 	@RequestMapping(value = "/employees", method = RequestMethod.GET)
@@ -125,14 +140,14 @@ public class NewContentController {
 
 	}
 
-	@RequestMapping(value = "/employees/edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/employees/edit", method = RequestMethod.GET)
 	public String editPatient(HttpServletRequest request, Locale locale,
 			Model model, Principal principal,
 			@RequestParam("id") int id) {
 		if (principal != null) {
 			Pracownik pracownik = pracownikServImpl.getPracownik(id);
 			model.addAttribute("pracownik",pracownik);
-			model.addAttribute("type", "edit");
+			model.addAttribute("edit", true);
 		}
 		return "add_employee";
 	}
@@ -182,6 +197,22 @@ public class NewContentController {
 		if (principal != null) {
 			ksiazkaServImpl.usunKsiazke(id);
 			model.addAttribute("success_remove", true);
+		}
+		return "books";
+
+	}
+	
+	@RequestMapping(value = "/searchBook", method = RequestMethod.GET, params = { "tytul" })
+	public String searchPatient(HttpServletRequest request, Locale locale,
+			Model model, Principal principal,
+			@RequestParam("tytul") String tytul) {
+		if (principal != null) {
+			List<Ksiazka> ksiazki = (List<Ksiazka>) ksiazkaServImpl.getKsiazka(tytul);
+			model.addAttribute("ksiazki", ksiazki);
+			if (ksiazki.get(0) == null) {
+				model.addAttribute("error", "Brak ksiazki!");
+			}
+
 		}
 		return "books";
 
