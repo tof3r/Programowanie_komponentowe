@@ -8,6 +8,7 @@ import glinski.dawid.wypozyczalnia.employee.Pracownik;
 import glinski.dawid.wypozyczalnia.employee.PracownikServiceImpl;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -202,15 +203,17 @@ public class NewContentController {
 
 	}
 	
-	@RequestMapping(value = "/searchBook", method = RequestMethod.GET, params = { "tytul" })
-	public String searchPatient(HttpServletRequest request, Locale locale,
+	@RequestMapping(value = "/books/search", method = RequestMethod.GET, params = { "tytul" })
+	public String searchBook(HttpServletRequest request, Locale locale,
 			Model model, Principal principal,
 			@RequestParam("tytul") String tytul) {
 		if (principal != null) {
-			List<Ksiazka> ksiazki = (List<Ksiazka>) ksiazkaServImpl.getKsiazka(tytul);
+			List<Ksiazka> ksiazki = new ArrayList<Ksiazka>();
+			Ksiazka ksiazka = ksiazkaServImpl.getKsiazka(tytul);
+			ksiazki.add(ksiazka);
 			model.addAttribute("ksiazki", ksiazki);
 			if (ksiazki.get(0) == null) {
-				model.addAttribute("error", "Brak ksiazki!");
+				model.addAttribute("found", false);
 			}
 
 		}

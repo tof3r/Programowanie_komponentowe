@@ -8,10 +8,7 @@
 
 	<secure:one roles='ROLE_USER'>
 		<P>
-			<a href="<c:url value="books/search" />">Szukaj ksiazki</a>
-		</P>
-		<P>
-			<a href="<c:url value="books" />">Wypozyczenia</a>
+			<a href="<c:url value="books" />">Wypozycz ksiazke</a>
 		</P>
 	</secure:one>
 	<secure:one roles='ROLE_EMPLOYEE'>

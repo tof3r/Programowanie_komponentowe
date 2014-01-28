@@ -48,13 +48,12 @@
 								<td><form action="clients/remove" method="post">
 										<button type="submit">Usun</button>
 										<input name="id" type="hidden" value="${klient.id}" />
-									</form></td>
-								<c:if test="${klient.enabled=='0'}">
-									<td><form action="clients/activate" method="post">
+									</form> <c:if test="${klient.enabled=='0'}">
+										<form action="clients/activate" method="post">
 											<button type="submit">Aktywuj</button>
 											<input name="id" type="hidden" value="${klient.id}" />
-										</form></td>
-								</c:if>
+										</form>
+									</c:if></td>
 							</secure:one>
 						</tr>
 					</c:forEach>

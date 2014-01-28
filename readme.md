@@ -18,3 +18,4 @@ zaimplementowane:
 - usuwanie pracownikow + info
 - usuwanie ksiazek + info
 - aktywacja uzytkownika + info
+- wyszukiwanie po tytule

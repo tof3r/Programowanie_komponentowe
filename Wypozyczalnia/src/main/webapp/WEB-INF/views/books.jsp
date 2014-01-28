@@ -15,6 +15,14 @@
 	padding: 8px;
 	margin: 16px;
 }
+
+.errorblock {
+	color: #ff0000;
+	background-color: #ffEEEE;
+	border: 3px solid #ff0000;
+	padding: 8px;
+	margin: 16px;
+}
 </style>
 <body>
 	<c:if test="${success}">
@@ -31,6 +39,7 @@
 			</P>
 		</div>
 	</c:if>
+
 	<c:if test="${not success}">
 		<c:if test="${not success_remove}">
 			<h2 align="center">Ksiazki</h2>
@@ -58,12 +67,24 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<form action="/dbloginapp/books/search" method="get">
+				<P align="center">
+					<input type="text" name="tytul" placeholder="Podaj tytul ksiazki">
+					<button type="submit">Szukaj</button>
+				</P>
+				<P align="center">
+					<a href="/dbloginapp/books"> Powrot</a>
+				</P>
+			</form>
 		</c:if>
 	</c:if>
+
+
+
 	<secure:one roles="ROLE_EMPLOYEE">
-	<P align="center">
-		<a href="/dbloginapp/books/add_book"> Dodaj ksiazke</a>
-	</P>
+		<P align="center">
+			<a href="/dbloginapp/books/add_book"> Dodaj ksiazke</a>
+		</P>
 	</secure:one>
 	<P align="center">
 		<a href="/dbloginapp/welcome"> Panel uzytkownika</a>
